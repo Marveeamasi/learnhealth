@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Video Dual",
-  description: "Your Number 1 Video Dual App",
+  title: "Welcome | LearnHealth",
+  description: "Your guide to Wellness and a Healthy life.",
 };
 
 export default function RootLayout({ children }) {
