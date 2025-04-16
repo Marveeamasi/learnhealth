@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #261148;
+  --foreground: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+    font-family: inter;
+    src: url("./fonts/Inter_18pt-Regular.ttf");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: pacifico;
+  src: url("./fonts/Pacifico-Regular.ttf");
 }
 
+.pacifico{
+  font-family: pacifico;
+}
+
+.italic{
+ font-style: italic;
+}
+
+*{
+  box-sizing: border-box;
+  user-select: none;
+}
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inter;
+  width: 100%;
+  max-width: 1600px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #261148;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #140926;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #08030f;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-fast {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.pulse-slow {
+  animation: pulse-slow 2s infinite;
+}
+
+.pulse-fast {
+  animation: pulse-fast 1s infinite;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  background: #9413E6;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 8px; 
+  height: 8px;
+  background: #9413E6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type='range']::-ms-thumb {
+  width: 8px;
+  height: 8px;
+  background: #9413E6;
+  border-radius: 50%;
+  cursor: pointer;
 }
