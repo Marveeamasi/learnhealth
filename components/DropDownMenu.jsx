@@ -4,7 +4,7 @@ import { IoIosArrowDown } from 'react-icons/io'
 
 export default function DropDownMenu() {
   return (
-    <div className='sm:hidden fixed bg-[#ffffffd8] w-full h-full rounded-t-2xl right-0 top-22 p-5 backdrop-blur-sm flex flex-col items-center gap-5'>
+    <div className='sm:hidden fixed bg-[#F9E9DA] w-full h-[70%] right-0 top-22 p-5 z-10 flex flex-col gap-5 text-[24px] font-[600] shadow-lg'>
        <div className='flex items-center gap-[8px] cursor-pointer hover:font-semibold'>Discover <IoIosArrowDown /></div>
        <div className='flex items-center gap-[8px] cursor-pointer hover:font-semibold'>Health Conditions <IoIosArrowDown /></div>
        <Link href={'#'} className='flex items-center gap-[8px] cursor-pointer hover:font-semibold'>About</Link>
