@@ -7,7 +7,7 @@ import { CiSearch } from 'react-icons/ci'
 import { SlArrowLeftCircle, SlArrowRightCircle } from 'react-icons/sl'
 
 export default function AlphaSearch({handleSetAlphabet}) {
-  const [healthConditions, setHealthConditions] = useState([])
+  const [healthTopics, setHealthTopics] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredSearchResults, setFilteredSearchResults] = useState([])
   const [showAllSearchResults, setShowAllSearchResults] = useState(false)
@@ -15,7 +15,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
   const [filteredAlphabetResults, setFilteredAlphabetResults] = useState([])
 
   useEffect(() => {
-    setHealthConditions(HEALTH_CONDITIONS_AND_TOPICS)
+    setHealthTopics(HEALTH_TOPICS)
   }, [])
 
   const handleSearch = (term) => {
@@ -26,7 +26,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
       return
     }
     const lowerTerm = term.toLowerCase()
-    const filtered = healthConditions
+    const filtered = healthTopics
       .filter((item) => item.toLowerCase().includes(lowerTerm))
       .sort()
     setFilteredSearchResults(filtered)
@@ -37,7 +37,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
     setFilteredSearchResults([])
     setShowAllSearchResults(false)
     setActiveAlphabet(alphabet)
-    const filtered = healthConditions
+    const filtered = healthTopics
       .filter((item) => item.toLowerCase().startsWith(alphabet.toLowerCase()))
       .sort()
     setFilteredAlphabetResults(filtered);
@@ -58,8 +58,8 @@ export default function AlphaSearch({handleSetAlphabet}) {
         </>
         :
         <> 
-        {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(condition =>
-              <Link href={'#'} key={condition} className='text-[20px] max-sm:text-[12px] font-[400]'>{condition}</Link>
+        {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(topic =>
+              <Link href={'#'} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
             )}
             </>
             }
@@ -110,8 +110,9 @@ export default function AlphaSearch({handleSetAlphabet}) {
            </>
            :
            <>
-           {filteredAlphabetResults.map(condition =>
-              <Link href={'#'} key={condition} className='text-[20px] font-[500]'>{condition}</Link>
+           {filteredAlphabetResults.map(topic =>
+              <Link href={'#'} key={topic
+              } className='text-[20px] font-[500]'>{topic}</Link>
             )}
             </>
             }
