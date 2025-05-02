@@ -16,7 +16,7 @@ export default function HealthTopicsPage() {
   return (
   <div className="flex w-full flex-col">
    <Navbar page={'health topics'}/>
-   <section className="px-30 py-20 flex flex-col gap-5">
+   <section className="px-30 py-20 max-sm:p-5 flex flex-col gap-5">
     <div className="flex items-center gap-2 text-[16px] text-[#979797]">
         <span>Home</span><RiArrowRightSLine/><span>Health Topics</span><RiArrowRightSLine/><span>{selectedAlphabet}</span>
     </div>
