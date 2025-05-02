@@ -50,7 +50,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
     <section className="flex flex-col w-full gap-10 relative">
 
       {shouldShowSearchResults && (
-        <div className={`bg-[#F9E9DA] px-30 py-10 max-sm:px-5 w-full absolute top-[-280px] max-sm:top-[-320px] shadow-lg flex flex-col justify-between gap-5`}>
+        <div className={`bg-[#F9E9DA] px-30 py-10 max-sm:px-5 w-full absolute top-[-280px] max-sm:top-[-320px] shadow-lg flex flex-col justify-between gap-5 z-30`}>
           <div className={`grid grid-cols-3 gap-5 justify-between items-center max-w-[897px] w-full ${showAllSearchResults && 'max-h-[192px] overflow-y-scroll'}`}>
            {filteredSearchResults?.length === 0?
         <>
