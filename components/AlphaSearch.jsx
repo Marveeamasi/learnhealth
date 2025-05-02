@@ -1,6 +1,6 @@
 'use client'
 
-import { alphabets, HEALTH_CONDITIONS_AND_TOPICS } from '@/dummyData'
+import { alphabets, HEALTH_TOPICS } from '@/dummyData'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
@@ -102,7 +102,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
 
       {activeAlphabet && (
         <div className='flex flex-col px-30 max-sm:px-5 gap-5'>
-          <h1 className='text-[32px] font-[600]'>Conditions & Topics starting with “{activeAlphabet}”</h1>
+          <h1 className='text-[32px] font-[600]'>Topics starting with “{activeAlphabet}”</h1>
           <div className='grid grid-cols-3 max-sm:grid-cols-1 gap-5 justify-between items-center max-w-[897px] w-full'>
            {filteredAlphabetResults?.length === 0? 
            <>
