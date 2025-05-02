@@ -15,7 +15,7 @@ export const TOP_ARTICLES = [
   {id: 3, image: '/img5.jpg', title: 'Prioritizing  Mental Health'},
 ]
 
-export const TOP_HEALTH_CONDITIONS = [
+export const TOP_HEALTH_TOPICS = [
   'Cancer','Alzheimers','Athlete’s Foot','Eczema','ADHD','Schizophrenia','Mental Health','Arthritis','Hypertension','Sleep Disorder','Diabetes'
  ]
  
