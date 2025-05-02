@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 
-export default function HealthConditionPage() {   
+export default function HealthTopicsPage() {   
    const [selectedAlphabet, setSelectedAlphabet] = useState('A');
 
    const handleSetAlphabet = (alphabet) => {
