@@ -4,7 +4,7 @@ import AlphaSearch from "@/components/AlphaSearch";
 import Footer from "@/components/Footer";
 import HeadCard from "@/components/HeadCard";
 import Navbar from "@/components/Navbar";
-import { aboutList, EXPLORE_BY, FEATURED_STORIES, MORE_ARTICLES, TODAY_TOP_STORIES, TOP_ARTICLES, TOP_HEALTH_CONDITIONS } from "@/dummyData";
+import { aboutList, EXPLORE_BY, FEATURED_STORIES, MORE_ARTICLES, TODAY_TOP_STORIES, TOP_ARTICLES, TOP_HEALTH_TOPICS } from "@/dummyData";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { SlArrowRightCircle } from "react-icons/sl";
@@ -13,7 +13,7 @@ export default function HomePage() {
   const [todayTopStories, setTodayTopStories] = useState([]);
   const [topArticles, setTopArticles] = useState([]);
   const [exploreBy, setExploreBy] = useState([]);
-  const [topHealthConditions, setTopHealthConditions] = useState([]);
+  const [topHealthTopics, setTopHealthTopics] = useState([]);
   const [featuredStories, setFeaturedStories] = useState([]);
   const [moreArticles, setMoreArticles] = useState([]);
  
@@ -21,7 +21,7 @@ export default function HomePage() {
       setTodayTopStories(TODAY_TOP_STORIES);
       setTopArticles(TOP_ARTICLES);
       setExploreBy(EXPLORE_BY);
-      setTopHealthConditions(TOP_HEALTH_CONDITIONS);
+      setTopHealthTopics(TOP_HEALTH_TOPICS);
       setFeaturedStories(FEATURED_STORIES);
       setMoreArticles(MORE_ARTICLES);
   },[])
@@ -73,14 +73,14 @@ export default function HomePage() {
    </section>
    <section  className="flex flex-col w-full px-30 max-sm:px-5 gap-5">
     <div className="flex justify-between items-center">
-   <h4 className="font-[600] text-[24px] text-[#004D43] max-sm:hidden">Top Health Conditions</h4>
-   <h4 className="font-[600] text-[24px] text-[#004D43] sm:hidden">Top Conditions</h4>
+   <h4 className="font-[600] text-[24px] text-[#004D43] max-sm:hidden">Top Health Topics</h4>
+   <h4 className="font-[600] text-[24px] text-[#004D43] sm:hidden">Top Topics</h4>
     <div className="flex gap-2 items-center text-[24px] font-[700] cursor-pointer max-sm:text-[18px]">View All <SlArrowRightCircle/></div>
    </div>
     <div className="flex items-center flex-wrap gap-5 max-sm:justify-center max-w-[1121px]">
-      {topHealthConditions.map(condition => 
-       <div key={condition} className="py-[10px] px-[24px] rounded-[24px] bg-[#F3F2F2] cursor-pointer">
-       {condition}
+      {topHealthTopics.map(topic => 
+       <div key={topic} className="py-[10px] px-[24px] rounded-[24px] bg-[#F3F2F2] cursor-pointer">
+       {topic}
        </div>
       )
       }
