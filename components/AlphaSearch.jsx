@@ -1,13 +1,13 @@
 'use client'
 
-import { alphabets, HEALTH_CONDITIONS_AND_TOPICS } from '@/dummyData'
+import { alphabets, HEALTH_TOPICS } from '@/dummyData'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { SlArrowLeftCircle, SlArrowRightCircle } from 'react-icons/sl'
 
 export default function AlphaSearch({handleSetAlphabet}) {
-  const [healthConditions, setHealthConditions] = useState([])
+  const [healthTopics, setHealthTopics] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredSearchResults, setFilteredSearchResults] = useState([])
   const [showAllSearchResults, setShowAllSearchResults] = useState(false)
@@ -15,7 +15,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
   const [filteredAlphabetResults, setFilteredAlphabetResults] = useState([])
 
   useEffect(() => {
-    setHealthConditions(HEALTH_CONDITIONS_AND_TOPICS)
+    setHealthTopics(HEALTH_TOPICS)
   }, [])
 
   const handleSearch = (term) => {
@@ -26,7 +26,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
       return
     }
     const lowerTerm = term.toLowerCase()
-    const filtered = healthConditions
+    const filtered = healthTopics
       .filter((item) => item.toLowerCase().includes(lowerTerm))
       .sort()
     setFilteredSearchResults(filtered)
@@ -37,7 +37,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
     setFilteredSearchResults([])
     setShowAllSearchResults(false)
     setActiveAlphabet(alphabet)
-    const filtered = healthConditions
+    const filtered = healthTopics
       .filter((item) => item.toLowerCase().startsWith(alphabet.toLowerCase()))
       .sort()
     setFilteredAlphabetResults(filtered);
@@ -50,7 +50,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
     <section className="flex flex-col w-full gap-10 relative">
 
       {shouldShowSearchResults && (
-        <div className={`bg-[#F9E9DA] px-30 py-10 max-sm:px-5 w-full absolute top-[-280px] max-sm:top-[-320px] shadow-lg flex flex-col justify-between gap-5`}>
+        <div className={`bg-[#F9E9DA] px-30 py-10 max-sm:px-5 w-full absolute top-[-300px] max-sm:top-[-350px] shadow-lg flex flex-col justify-between gap-5 z-30`}>
           <div className={`grid grid-cols-3 gap-5 justify-between items-center max-w-[897px] w-full ${showAllSearchResults && 'max-h-[192px] overflow-y-scroll'}`}>
            {filteredSearchResults?.length === 0?
         <>
@@ -58,8 +58,8 @@ export default function AlphaSearch({handleSetAlphabet}) {
         </>
         :
         <> 
-        {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(condition =>
-              <Link href={'#'} key={condition} className='text-[20px] max-sm:text-[12px] font-[400]'>{condition}</Link>
+        {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(topic =>
+              <Link href={'/topic/'+topic} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
             )}
             </>
             }
@@ -102,7 +102,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
 
       {activeAlphabet && (
         <div className='flex flex-col px-30 max-sm:px-5 gap-5'>
-          <h1 className='text-[32px] font-[600]'>Conditions & Topics starting with “{activeAlphabet}”</h1>
+          <h1 className='text-[32px] font-[600]'>Topics starting with “{activeAlphabet}”</h1>
           <div className='grid grid-cols-3 max-sm:grid-cols-1 gap-5 justify-between items-center max-w-[897px] w-full'>
            {filteredAlphabetResults?.length === 0? 
            <>
@@ -110,8 +110,8 @@ export default function AlphaSearch({handleSetAlphabet}) {
            </>
            :
            <>
-           {filteredAlphabetResults.map(condition =>
-              <Link href={'#'} key={condition} className='text-[20px] font-[500]'>{condition}</Link>
+           {filteredAlphabetResults.map(topic =>
+              <Link href={'/topic/'+topic} key={topic} className='text-[20px] font-[500]'>{topic}</Link>
             )}
             </>
             }

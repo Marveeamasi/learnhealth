@@ -4,7 +4,7 @@ import { FaLinkedin, FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col w-full justify-center items-center gap-20 p-30 max-sm:p-5 bg-[#FCF6F0]">
+    <footer className="flex flex-col w-full justify-center items-center gap-20 p-30 max-sm:p-5 max-sm:py-20 bg-[#FCF6F0]">
     <div className="flex max-sm:flex-col w-full justify-center gap-30">
       <div className="max-w-[432px] w-full flex flex-col gap-5">
          <h1 className="text-[24px] font-[700]">Sign up for our newsletter</h1>
