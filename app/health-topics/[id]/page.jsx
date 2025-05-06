@@ -7,6 +7,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { useParams, useRouter } from 'next/navigation'
 import { PRODUCTS } from '@/dummyData';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const items = ['overview', 'usage', 'ingredients', 'pricing']
 
@@ -140,12 +141,27 @@ export default function ProductPage() {
   return (
   <div className="flex w-full flex-col">
    <Navbar page={'product review'}/>
-  <section className="flex flex-col px-30 py-20 max-sm:p-5 gap-10">
-     <div className="w-full h-[360px] bg-[#F9E9DA] flex justify-center items-center"></div>
+   <div className='w-full relative h-[402px] max-sm:h-[250px] bg-[#F9E9DA] flex justify-center items-center'>
+      <Image width={2000} height={2000} alt='topic banner' src={'/img3.png'} className='absolute w-full h-full object-fill object-right top-0'/>
+      <div className='absolute max-sm:hidden left-0 flex flex-col gap-5 w-[90%] h-full px-30 max-sm:px-5 py-20 max-sm:py-5' style={{background: `linear-gradient(90deg, #343434 35.76%, rgba(102, 101, 101, 0) 65.49%)`}}>
       <div className="flex items-center gap-2 text-[16px] text-[#979797]">
-             <span>Home</span><RiArrowRightSLine/><span>Product</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{product?.name}</span>
+             <span>Home</span><RiArrowRightSLine/><span>Health Topics</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{validId}</span>
+     </div> 
+     <h1 className='font-[700] max-w-[625px] text-[40px] max-sm:text-[28px] text-[#FBFBFB]'>The Impact of Sedentary Lifestyle on Cardiovascular Health</h1>
+     <div className='flex gap-3'>
+         <div className='w-[46px] h-[46px] rounded-full bg-[#D9D9D9] flex justify-center items-center'></div>
+         <div className='flex flex-col gap-0 font-[400] text-[16px] text-[#979797]'>
+            <p>Written by <b className='text-black'>{product?.author}</b></p>
+            <p>Posted on {product?.publishedOn}</p>
+         </div>
+      </div>
      </div>
-     <div className='flex justify-between gap-5 max-sm:flex-col'>
+   </div>
+  <section className="flex flex-col px-30 py-20 max-sm:p-5 gap-10">
+  <div className="flex sm:hidden items-center gap-2 text-[16px] text-[#979797]">
+             <span>Home</span><RiArrowRightSLine/><span>Product</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{validId}</span>
+     </div>
+     <div className='flex justify-between gap-5 sm:hidden max-sm:flex-col'>
       <div className='flex flex-col gap-3'>
          <h1 className='font-[700] text-[48px] max-sm:text-[32px]'>{product?.name}</h1>
          <p className='font-[400] text-[16px] max-w-[455px] w-full'>{product?.desc}</p>

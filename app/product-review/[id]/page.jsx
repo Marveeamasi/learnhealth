@@ -140,10 +140,12 @@ export default function ProductPage() {
   return (
   <div className="flex w-full flex-col">
    <Navbar page={'product review'}/>
-  <section className="flex flex-col px-30 py-20 max-sm:p-5 gap-10">
-     <div className="w-full h-[360px] bg-[#F9E9DA] flex justify-center items-center"></div>
+   <div className='sm:px-30 pt-20 sm:pb-15 max-sm:py-10'>
+   <div className="w-full h-[360px] bg-[#F9E9DA] flex justify-center items-center"></div>
+   </div>
+  <section className="flex flex-col px-30 pb-20 max-sm:p-5 gap-10">
       <div className="flex items-center gap-2 text-[16px] text-[#979797]">
-             <span>Home</span><RiArrowRightSLine/><span>Product</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{product?.name}</span>
+             <span>Home</span><RiArrowRightSLine/><span>Product</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{validId}</span>
      </div>
      <div className='flex justify-between gap-5 max-sm:flex-col'>
       <div className='flex flex-col gap-3'>

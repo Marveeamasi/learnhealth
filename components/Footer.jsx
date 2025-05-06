@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="flex flex-col gap-5">
               <Link href={'#'} className="font-[700] text-[18px] text-[#969696]">About</Link>
               <Link href={'#'} className="font-[400] text-[18px]">News</Link>
-              <Link href={'#'} className="font-[400] text-[18px]">Services</Link>
+              <Link href={'/services'} className="font-[400] text-[18px]">Services</Link>
               <Link href={'#'} className="font-[400] text-[18px]">Sitemap</Link>
             </div>
            </div>

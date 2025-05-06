@@ -814,3 +814,18 @@ updatedOn: 'December 10, 2024',
 author: 'Kalu Daniel'
 },
 ]
+
+export const SERVICES = [
+  {
+    id: 1, img: '/img14.png', heading: 'Content creation for Health Organizations', paragraph: `Tailored content to your business needs and strategies.`, 
+  },
+  {
+    id: 2, img: '/img13.png', heading: 'Medical Writing', paragraph: `Get the best writing for your clinical reports and research papers.`, 
+  },
+  {
+    id: 3, img: '/img12.png', heading: 'Ebooks and Whitepapers', paragraph: `Get the best writing for your clinical reports and research papers.`, 
+  },
+  {
+    id: 4, img: '/img15.png', heading: 'Blogs and Ghostwriting', paragraph: `Tailored content to your business needs and strategies.`, 
+  }
+]

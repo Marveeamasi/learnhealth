@@ -59,7 +59,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
         :
         <> 
         {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(topic =>
-              <Link href={'/topic/'+topic} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
+              <Link href={'/health-topics/'+topic.replace(/-/g, '-')} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
             )}
             </>
             }
@@ -111,7 +111,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
            :
            <>
            {filteredAlphabetResults.map(topic =>
-              <Link href={'/topic/'+topic} key={topic} className='text-[20px] font-[500]'>{topic}</Link>
+              <Link href={'/health-topics/'+topic.replace(/ /g, '-')} key={topic} className='text-[20px] font-[500]'>{topic}</Link>
             )}
             </>
             }
