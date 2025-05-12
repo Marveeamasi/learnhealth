@@ -1,10 +1,10 @@
 'use client'
 
-import { alphabets, HEALTH_TOPICS } from '@/dummyData'
+import { alphabets, BLOGS,  } from '@/dummyData'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
-import { SlArrowLeftCircle, SlArrowRightCircle } from 'react-icons/sl'
+import { SlArrowRightCircle } from 'react-icons/sl'
 
 export default function AlphaSearch({handleSetAlphabet}) {
   const [healthTopics, setHealthTopics] = useState([])
@@ -15,7 +15,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
   const [filteredAlphabetResults, setFilteredAlphabetResults] = useState([])
 
   useEffect(() => {
-    setHealthTopics(HEALTH_TOPICS)
+    setHealthTopics(BLOGS.filter(b=> b?.category === 'articles'));
   }, [])
 
   const handleSearch = (term) => {
@@ -27,8 +27,12 @@ export default function AlphaSearch({handleSetAlphabet}) {
     }
     const lowerTerm = term.toLowerCase()
     const filtered = healthTopics
-      .filter((item) => item.toLowerCase().includes(lowerTerm))
-      .sort()
+    .filter(item =>
+      item?.keywords?.some(keyword =>
+        keyword?.toLowerCase()?.includes(lowerTerm)
+      )
+    )
+    .sort()
     setFilteredSearchResults(filtered)
   }
 
@@ -38,7 +42,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
     setShowAllSearchResults(false)
     setActiveAlphabet(alphabet)
     const filtered = healthTopics
-      .filter((item) => item.toLowerCase().startsWith(alphabet.toLowerCase()))
+      .filter((item) => item?.name?.toLowerCase().startsWith(alphabet.toLowerCase()))
       .sort()
     setFilteredAlphabetResults(filtered);
     handleSetAlphabet(alphabet);
@@ -59,7 +63,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
         :
         <> 
         {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(topic =>
-              <Link href={'/health-topics/'+topic.replace(/-/g, '-')} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
+              <Link href={'/health-topics/'+topic?.name.replace(/-/g, '-')} key={topic?.id} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic.name}</Link>
             )}
             </>
             }
@@ -111,7 +115,7 @@ export default function AlphaSearch({handleSetAlphabet}) {
            :
            <>
            {filteredAlphabetResults.map(topic =>
-              <Link href={'/health-topics/'+topic.replace(/ /g, '-')} key={topic} className='text-[20px] font-[500]'>{topic}</Link>
+              <Link href={'/health-topics/'+topic?.name.replace(/ /g, '-')} key={topic?.id} className='text-[20px] font-[500]'>{topic?.name}</Link>
             )}
             </>
             }

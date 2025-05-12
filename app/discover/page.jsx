@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 import Link from 'next/link'
 import { CiSearch } from 'react-icons/ci'
 import { SlArrowRightCircle } from 'react-icons/sl'
-import { EXPLORE_BY, FEATURED_STORIES } from "@/dummyData";
-import HeadCard from "@/components/HeadCard";
+import { BLOGS } from "@/dummyData";
 
-const SearchTerm = () => {
+const SearchTerm = ({products}) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredSearchResults, setFilteredSearchResults] = useState([])
   const [showAllSearchResults, setShowAllSearchResults] = useState(false)
@@ -20,8 +19,12 @@ const SearchTerm = () => {
       return
     }
     const lowerTerm = term.toLowerCase()
-    const filtered = ['Mens', 'Women', 'Kids']
-      .filter((item) => item.toLowerCase().includes(lowerTerm))
+    const filtered = products
+    .filter(item =>
+      item?.keywords?.some(keyword =>
+        keyword?.toLowerCase()?.includes(lowerTerm)
+      )
+    )
       .sort()
     setFilteredSearchResults(filtered)
   }
@@ -41,7 +44,7 @@ const SearchTerm = () => {
         :
         <> 
         {(showAllSearchResults ? filteredSearchResults : filteredSearchResults.slice(0, 12)).map(topic =>
-              <Link href={'/topic/'+topic} key={topic} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic}</Link>
+              <Link href={'/topic/'+topic.name.replace(/ /g,'-')} key={topic.name} className='text-[20px] max-sm:text-[12px] font-[400]'>{topic.name}</Link>
             )}
             </>
             }
@@ -61,7 +64,7 @@ const SearchTerm = () => {
         <div className="max-w-[466px] w-full h-[53px] rounded-[32px] font-[400] bg-[#F3F2F2] flex items-center py-[18px] px-[24px]">
           <input
             className="outline-none placeholder:text-[#858585] text-sm flex-[1]"
-            placeholder="Search by keyword, disease or topic"
+            placeholder="Search by keyword, products, ebooks"
             value={searchTerm}
             onChange={(e) => handleSearch(e.target.value)}
           />
@@ -72,15 +75,15 @@ const SearchTerm = () => {
   )
 }
 
-const ExploreBy = ({exploreBy}) => {
+const ProductLists = ({products}) => {
   
   return (
-    <section  className="flex flex-col w-full gap-5 mt-10">
-    <div className="grid grid-cols-2 gap-5">
-      {exploreBy.map(by => 
-       <div key={by} className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative p-5">
-        <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px]">{by}</div>
-       </div>
+    <section className="flex flex-col w-full gap-5 mt-10">
+    <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-5">
+      {products.map(p => 
+       <Link href={`/product-review/${p.name.replace(/ /g, '-')}`} key={p.name} className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative p-5">
+        <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px]">{p.name}</div>
+       </Link>
       )
       }
      </div>
@@ -88,40 +91,22 @@ const ExploreBy = ({exploreBy}) => {
   )
 }
 
-const Featured = ({featuredStories}) => {
-  return(
-     <section className="flex flex-col w-full gap-5 mt-10">
-        <h4 className="font-[600] text-[24px]">Featured</h4>
-        <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1">
-          {featuredStories.map(fStory => 
-           <HeadCard topic={fStory.topic} key={fStory.id} img={fStory.image} title={fStory.title} h={'h-[300px]'} text={'text-[24px]'} textsm={'text-[18px]'}/>
-          )
-          }
-         </div>
-       </section>
-  )
-}
 
-
+ 
 export default function DiscoverPage() {   
-  const [exploreBy, setExploreBy] = useState([]);
-  const [featuredStories, setFeaturedStories] = useState([]);
-
-   useEffect(()=> {
-        setExploreBy(EXPLORE_BY);
-        setFeaturedStories(FEATURED_STORIES);
-    },[])
+   const [products, setProducts] = useState([]);
+       useEffect(()=> {
+             setProducts(BLOGS.filter(b=> b?.category === 'products'));
+         },[])
   
   return (
   <div className="flex w-full flex-col">
    <Navbar page={'discover'}/>
    <section className="px-30 py-20 max-sm:p-5 flex flex-col gap-5">
     <div className="font-[700] text-[48px]">Discover</div>
-    <p className="font-[400] text-[16px] max-w-[455px]">Browse our vast range of health topics and find information
-    on treatment, prevention and coping strategies and stories.</p>
-    <SearchTerm/>
-    <ExploreBy exploreBy={exploreBy}/>
-    <Featured featuredStories={featuredStories}/>
+    <p className="font-[400] text-[16px] max-w-[455px]">Discover our valuable products, ebooks, audio, notes and more to keep you up to date and at the top on a healthy journey.</p>
+    <SearchTerm products={products}/>
+   <ProductLists products={products}/>
    </section>
    <div className="p-40"></div>
    <Footer/>

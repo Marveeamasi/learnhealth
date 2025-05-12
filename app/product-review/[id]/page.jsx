@@ -5,23 +5,23 @@ import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useParams, useRouter } from 'next/navigation'
-import { PRODUCTS } from '@/dummyData';
+import { BLOGS } from '@/dummyData';
 import Link from 'next/link';
+import Image from 'next/image';
 
-const items = ['overview', 'usage', 'ingredients', 'pricing']
 
-const LeftBar = ({handleSetCurrentItem, currentItem}) => {
+const LeftBar = ({handleSetCurrentItem, currentItem, product}) => {
    const router = useRouter();
 
-   const handleLinkClick = (i) => {
-     router.push(`#${i}`);
-     handleSetCurrentItem(i);
+   const handleLinkClick = (h) => {
+     router.push(`#${h.replace(/ /g, '-').toLowerCase()}`);
+     handleSetCurrentItem(h);
    }
 
    return(
        <div className='flex sm:flex-col sm:gap-[24px] gap-5 max-sm:pb-5 max-sm:flex-wrap sm:border-r sm:border-r-[#D5D5D5] sm:pr-20 sm:pt-10 sm:h-[386px]'>
-         {items.map((i)=> 
-           <div onClick={()=>handleLinkClick(i)} key={i} className={`capitalize font-[500] text-[16px] text-[#979797] cursor-pointer`} style={{color: currentItem===i ? `black` : `#979797`}}>{i}</div>
+         {product?.headings?.map((h)=> 
+           <div onClick={()=>handleLinkClick(h?.name)} key={h?.name} className={`capitalize font-[500] text-[16px] text-[#979797] cursor-pointer`} style={{color: currentItem===h?.name ? `black` : `#979797`}}>{`${h?.name.slice(0,16)}${h?.name.length>16 ? '..' : ''}`}</div>
          )}
        </div>
    );
@@ -30,38 +30,19 @@ const LeftBar = ({handleSetCurrentItem, currentItem}) => {
 const MiddleBar = ({product}) => {
    return(
        <div className='flex flex-col gap-5 max-w-[572px] sm:px-10'>
-         <section id='overview' className='flex flex-col gap-5'>
-              <h1 className='font-[700] text-[32px]'>Overview</h1>
-              <div className='flex flex-col gap-5'>
-              {product?.overview?.map((o)=> 
-                 <p key={o} className='font-[400] text-[16px]'>{o}</p>
-            )}
-            </div>
-         </section>
-         <section id='usage' className='flex flex-col gap-5'>
-              <h1 className='font-[700] text-[32px]'>Usage</h1>
-              <div className='flex flex-col gap-5'>
-              {product?.usage?.map((u)=> 
-                 <p key={u} className='font-[400] text-[16px]'>{u}</p>
-            )}
-            </div>
-         </section>
-         <section id='ingredients' className='flex flex-col gap-5'>
-              <h1 className='font-[700] text-[32px]'>Ingredients</h1>
-              <div className='flex flex-col gap-5'>
-              {product?.ingredients?.map((i)=> 
-                 <p key={i} className='font-[400] text-[16px]'>{i}</p>
-            )}
-            </div>
-         </section>
-         <section id='pricing' className='flex flex-col gap-5'>
-              <h1 className='font-[700] text-[32px]'>Pricing</h1>
-              <div className='flex flex-col gap-5'>
-              {product?.pricing?.map((p)=> 
-                 <p key={p} className='font-[400] text-[16px]'>{p}</p>
-            )}
-            </div>
-         </section>
+         {product?.headings?.map(h=>
+             <section key={h?.name} id={h?.name?.replace(/ /g, '-').toLowerCase()} className='flex flex-col gap-5'>
+             <h1 className='font-[700] text-[32px]'>{h?.name}</h1>
+             <div className='flex flex-col gap-5'>
+             {h?.paragraphs?.map((p)=> 
+                <span key={p?.text} className='font-[400] text-[16px]'>
+                  {p?.heading && <span className='font-[600] text-[18px]' style={{display: p?.heading?.includes(':')?'initial' : 'block'}}>{p?.heading}</span>}
+                  {p?.text}
+                </span>
+           )}
+           </div>
+        </section>
+         )}
          <section className='flex flex-col gap-2'>
            <h2 className='text-[24px] font-[600]'>Keywords</h2>
            <div className='flex items-center gap-5 flex-wrap'>
@@ -100,14 +81,14 @@ const RightBar = ({product}) => {
    const [relatedPosts, setRelatedPosts] = useState([]);
 
    useEffect(()=> {
-      setRelatedPosts(PRODUCTS.filter(p=> p?.author.author === product?.author))
-   }, [])
+      setRelatedPosts(BLOGS.filter(b=> b?.group === product?.group))
+   }, [product])
 
    return(
        <div className='flex flex-col gap-5 sm:mt-20 sm:ml-30 max-w-[219px]'>
-         <h3 className='text-[#979797] text-[16px] font-[400]'>Related Products</h3>
+         <h3 className='text-[#979797] text-[16px] font-[400]'>Related BLOGS</h3>
          {relatedPosts.map((r)=> 
-           <Link href={`#`} key={r.name} className='underline font-[400] text-[20px]'>{r.name}</Link>
+           <Link href={`/product-review/${r.name.replace(/ /g, '-').toLowerCase()}`} key={r.name} className='underline font-[400] text-[20px]'>{r.name}</Link>
          )}
        </div>
    );
@@ -128,7 +109,7 @@ export default function ProductPage() {
 
      useEffect(()=> {
       handleSetAlphabet(validId.slice(0,1))
-      const selectedProduct = PRODUCTS.find(p=> p.name.toLowerCase() === validId);
+      const selectedProduct = BLOGS.find(b=> b?.category === 'products' && b?.name.toLowerCase() === validId.toLowerCase());
       setProduct(selectedProduct);
      },[])
 
@@ -141,10 +122,17 @@ export default function ProductPage() {
   <div className="flex w-full flex-col">
    <Navbar page={'product review'}/>
    <div className='sm:px-30 pt-20 sm:pb-15 max-sm:py-10'>
-   <div className="w-full h-[360px] bg-[#F9E9DA] flex justify-center items-center"></div>
+   <div className="w-full h-[360px] bg-[#F9E9DA] flex justify-center items-center">
+      {product?.media && product?.mediaType === 'image' && <Image src={product?.media} width={2000} height={2000} alt='image banner' className='w-full h-full object-contain'/>}
+      {product?.media && product?.mediaType === 'video' && <video src={product?.media} autoPlay controls className='w-full h-full object-contain'/>}
+      {product?.media && product?.mediaType === 'audio' && <audio controls className='w-full h-full accent-[#F9E9DA] bg-transparent text-[#F9E9DA]'>
+          <source src={product?.media}/>
+          Your browser does not support this audio
+         </audio>}
+   </div>
    </div>
   <section className="flex flex-col px-30 pb-20 max-sm:p-5 gap-10">
-      <div className="flex items-center gap-2 text-[16px] text-[#979797]">
+      <div className="flex items-center gap-2 text-[16px] text-[#979797] flex-wrap">c
              <span>Home</span><RiArrowRightSLine/><span>Product</span><RiArrowRightSLine/><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine/><span className='capitalize'>{validId}</span>
      </div>
      <div className='flex justify-between gap-5 max-sm:flex-col'>
@@ -161,7 +149,7 @@ export default function ProductPage() {
       </div>
      </div>
      <div className='flex max-sm:flex-col sm:mt-10 max-sm:gap-10'>
-      <LeftBar currentItem={currentItem} handleSetCurrentItem={handleSetCurrentItem}/>
+      <LeftBar currentItem={currentItem} handleSetCurrentItem={handleSetCurrentItem} product={product}/>
       <MiddleBar product={product}/>
       <RightBar product={product}/>
      </div>

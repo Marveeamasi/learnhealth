@@ -9,7 +9,7 @@ export default function HeadCard({img,title,h='h-[360px]',text='text-[32px]',tex
       <Image src={img} alt='card' width={2000} height={2000} className={`${h} object-cover object-top w-full`}/>
       </div>
      { topic!== '' && <Link className='underline text-[13px] font-[400] text-[#004D43]' href={'#'}>{topic}</Link>}
-      <h3 className={`${text} font-semibold max-sm:${textsm} leading-[100%]`}>{title}</h3>
+      <Link href={`/health-topics/${title.replace(/ /g, '-')}`} className={`${text} font-semibold max-sm:${textsm} leading-[100%]`}>{title}</Link>
     </div>
   )
 }

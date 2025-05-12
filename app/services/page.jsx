@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { SERVICES } from "@/dummyData";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SlArrowRightCircle } from "react-icons/sl";
 
@@ -15,7 +16,7 @@ const Service = ({service}) => {
         <h2 className="font-[700] text-[18px]">{service?.heading}</h2>
         <p className="font-[400] text-[16px]">{service?.paragraph}</p>
         <div className="h-full flex items-end">
-        <div className="flex gap-2 items-center font-[600] cursor-pointer text-[16px]">Book service <SlArrowRightCircle/></div>
+        <Link href={`/contact-us/?service=${service?.heading}`} className="flex gap-2 items-center font-[600] cursor-pointer text-[16px]">Book service <SlArrowRightCircle/></Link>
         </div>
       </div>
     </div>
