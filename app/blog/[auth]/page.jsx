@@ -308,7 +308,7 @@ export default function BlogWritingPage() {
                 width={2000}
                 height={2000}
                 alt="basic-info"
-                src={`/basic-info.png`}
+                src={`/basic-info.PNG`}
                 className="w-full h-full object-contain bg-[#80808071]"
               />
             </motion.div>
@@ -325,7 +325,7 @@ export default function BlogWritingPage() {
                 width={2000}
                 height={2000}
                 alt="content-section"
-                src={`/content-section.png`}
+                src={`/content-section.PNG`}
                 className="w-full h-full object-contain bg-[#80808071]"
               />
             </motion.div>
@@ -583,7 +583,7 @@ export default function BlogWritingPage() {
                 width={2000}
                 height={2000}
                 alt="meta-data"
-                src={`/meta-data.png`}
+                src={`/meta-data.PNG`}
                 className="w-full h-full object-contain bg-[#80808071]"
               />
             </motion.div>
