@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react'
-import { FaLinkedin, FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaLinkedin, FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -16,7 +16,7 @@ export default function Footer() {
          <div className="text-[#F3D1B6] gap-2 flex items-center text-[24px]">
           <Link href={'#'}><FaLinkedin/></Link>
           <Link href={'#'}><FaFacebook/></Link>
-          <Link href={'#'}><FaXTwitter/></Link>
+          <Link href={'#'}><FaYoutube/></Link>
           <Link href={'#'}><FaInstagram/></Link>
          </div>
       </div>

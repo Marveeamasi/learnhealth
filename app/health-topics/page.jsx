@@ -13,7 +13,7 @@ const ExploreBy = ({exploreBy}) => {
   
   return (
     <section  className="flex flex-col w-full gap-5 mt-10">
-    <div className="grid grid-cols-4 max-sm:grid-cols-2 gap-5">
+    <div className="grid grid-cols-5 max-sm:grid-cols-2 gap-5">
       {exploreBy.map(by => 
        <Link href={`/category/${by.replace(/ /g, '-')}`} key={by} className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative p-5">
         <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px]">{by}</div>

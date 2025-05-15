@@ -5,6 +5,42 @@ export const EXPLORE_BY = [
  'Nutrition','Public Health','Mental Health','Fitness', `Women's Health`,
 ]
 
+export const BOOKING = [
+  {
+   name: 'Rueben Philips',
+   email: 'kelvin12@gmial.com',
+   service: 'medical writing',
+   message: 'please i need to be part of this'
+}, {
+   name: 'Kelechi Uche',
+   email: 'kcchi@gmial.com',
+   service: 'content creation',
+   message: 'is there a way i can write in the blogs?'
+}, {
+   name: 'Agatha Ralph',
+   email: 'argsd2@gmial.com',
+   service: 'medical writing',
+   message: 'Hi , can i make some inquiries'
+},
+{
+   name: 'Randy Paul',
+   email: 'kelvin12@gmial.com',
+   service: 'medical writing',
+   message: 'please i need to be part of this'
+}, {
+   name: 'Dickson Danna',
+   email: 'kcchi@gmial.com',
+   service: 'content creation',
+   message: 'is there a way i can write in the blogs?'
+}, {
+   name: 'Maxwell Dealan',
+   email: 'argsd2@gmial.com',
+   service: 'medical writing',
+   message: 'Hi , can i make some inquiries, please i need to be part of this'
+},]
+
+export const NEWSLETTER_EMAILS = ['amasimarvee@gmail.com', 'kelvin12@gmial.com', 'dukese@gmail.com', 'ganachiohh@gmail.com', 'mikasa@gmail.com', 'armin@gmail.com', 'levi@gmail.com']
+
 export const TODAY_TOP_STORIES = [
   {id: 1, image: '/img1.jpg', title: 'Exercises for Chronic Pain Management'},
   {id: 2, image: '/img2.jpg', title: 'The Link Between Sleep and Mental Health: Rest Well, Feel Well'},
@@ -131,7 +167,7 @@ publishedOn: 'November 9, 2024',
 updatedOn: 'December 10, 2024',
 author: 'Kalu Daniel',
 category: 'products',
-group: 'drugs'
+group: 'medicine',
 },
 ]
 
