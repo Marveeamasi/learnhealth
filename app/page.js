@@ -282,7 +282,7 @@ export default function HomePage() {
             width={2000}
             height={2000}
             alt="image"
-            className="max-w-[500px]"
+            className="max-w-[500px] w-full"
           />
         </motion.div>
         <div className="flex flex-col max-sm:items-center gap-5 max-w-[440px]">
