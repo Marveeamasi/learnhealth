@@ -134,17 +134,18 @@ export default function HomePage() {
             View All <SlArrowRightCircle />
           </motion.div>
         </div>
-        <div className="grid grid-cols-5 max-sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-5 max-lg:grid-cols-3 max-sm:grid-cols-2 gap-5">
           {exploreBy.map((by, index) => (
             <motion.div
-              key={by}
+              key={by.name}
               variants={scaleIn}
               initial="hidden"
               animate="visible"
               transition={{ delay: index * 0.1 }}
-              className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative p-5"
+              className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] overflow-hidden flex items-center justify-center relative"
             >
-              <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px]">{by}</div>
+              <Image src={by.img} alt={by.name} width={2000} height={2000} className="w-full h-full object-cover grayscale-75 hover:scale-105 hover:grayscale-0 transition-all duration-300 ease-in-out"/>
+              <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px] bg-[#0000002c] rounded-xl p-0 px-2 text-white">{by.name}</div>
             </motion.div>
           ))}
         </div>
@@ -277,11 +278,11 @@ export default function HomePage() {
       <AnimatedSection variants={fadeIn} className="flex w-full max-sm:flex-col px-30 max-sm:px-5 gap-20 max-sm:gap-10 justify-center items-center">
         <motion.div variants={scaleIn}>
           <Image
-            src={'/img11.png'}
+            src={'/medteam.png'}
             width={2000}
             height={2000}
             alt="image"
-            className="w-[398px] h-[398px] max-sm:w-[191px] max-sm:h-[191px]"
+            className="max-w-[500px]"
           />
         </motion.div>
         <div className="flex flex-col max-sm:items-center gap-5 max-w-[440px]">

@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import { useEffect, useState } from 'react';
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useParams, useRouter } from 'next/navigation'
-import { BLOGS } from '@/dummyData';
+import { BLOGS, EXPLORE_BY } from '@/dummyData';
 import Link from 'next/link';
 import Image from 'next/image';
 import HeadCard from '@/components/HeadCard';
@@ -15,20 +15,22 @@ export default function CategoryPage() {
    const {cat} = params
    const validId = cat.replace(/-/g, ' ');
    const [articles, setArticles] = useState([]);
+   const [banner, setBanner] = useState('');
   
 
      useEffect(()=> {
       document.title = validId;
+      const selectedBanner = EXPLORE_BY.find(e=> e?.name.toLowerCase() === validId.toLowerCase() )?.img;
+      setBanner(selectedBanner);
      const selectedArticles = BLOGS.filter(b=> b?.category === 'articles' && b?.group.toLowerCase() === validId.toLowerCase());
       setArticles(selectedArticles);
      },[])
-     
   
   return (
   <div className="flex w-full flex-col">
    <Navbar page={'category'}/>
    <div className='w-full h-[402px] max-sm:h-[250px] bg-[#F9E9DA] flex justify-center items-center'>
-     
+    {banner && <Image src={banner} alt='banner' width={2000} height={2000} className='w-full h-full object-cover object-top'/>}
    </div>
   <section className="flex flex-col px-30 py-20 max-sm:p-5 gap-10">
       <div className="flex items-center gap-2 text-[16px] text-[#979797] flex-wrap">c

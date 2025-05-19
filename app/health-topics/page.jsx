@@ -8,15 +8,17 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { EXPLORE_BY, FEATURED_STORIES } from "@/dummyData";
 import HeadCard from "@/components/HeadCard";
 import Link from "next/link";
+import Image from "next/image";
 
 const ExploreBy = ({exploreBy}) => {
   
-  return (
+  return ( 
     <section  className="flex flex-col w-full gap-5 mt-10">
-    <div className="grid grid-cols-5 max-sm:grid-cols-2 gap-5">
+    <div className="grid grid-cols-5 max-lg:grid-cols-3 max-sm:grid-cols-2 gap-5">
       {exploreBy.map(by => 
-       <Link href={`/category/${by.replace(/ /g, '-')}`} key={by} className="w-full h-[278px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative p-5">
-        <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px]">{by}</div>
+       <Link href={`/category/${by.name.replace(/ /g, '-')}`} key={by.name} className="w-full h-[278px] bg-[#F9E9DA] overflow-hidden cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative">
+       <Image src={by.img} alt={by.name} width={2000} height={2000} className="w-full h-full object-cover grayscale-75 hover:scale-105 hover:grayscale-0 transition-all duration-300 ease-in-out"/>
+                     <div className="absolute sm:bottom-5 max-sm:top-3 sm:left-5 max-sm:left-3 font-[600] text-[18px] bg-[#0000002c] rounded-xl p-0 px-2 text-white">{by.name}</div>
        </Link>
       )
       }

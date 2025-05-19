@@ -2,7 +2,11 @@
 export const alphabets = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
 export const EXPLORE_BY = [
- 'Nutrition','Public Health','Mental Health','Fitness', `Women's Health`,
+ {name:'Nutrition', img: '/nutrition.jpg'},
+ {name:'Public Health', img: '/public.jpg'},
+ {name: 'Mental Health', img: '/mental.jpg'},
+ {name: 'Fitness', img: '/fitness.jpg'},
+{name: `Women's Health`, img: '/womens.jpg'},
 ]
 
 export const BOOKING = [
