@@ -16,7 +16,7 @@ export default function Footer() {
     setSubmitStatus(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/subscriptions', { email });
+      const response = await axios.post('https://learnhealth-api/api/subscriptions', { email });
       setEmail('');
       setSubmitStatus('success');
     } catch (error) {
