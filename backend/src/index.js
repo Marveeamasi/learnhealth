@@ -7,7 +7,18 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'http://localhost:3000'
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // Supabase client
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-// Routes (to be created)
+// Routes
 const blogRoutes = require('./routes/blogRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
@@ -24,8 +35,5 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/bookings', bookingRoutes);
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Export for Vercel serverless
+module.exports = app;
