@@ -210,9 +210,9 @@ export default function AdminPage() {
       try {
         setLoading(true);
         const [emailsResponse, bookingsResponse, blogsResponse] = await Promise.all([
-          axios.get('http://localhost:5000/api/subscriptions'),
-          axios.get('http://localhost:5000/api/bookings'),
-          axios.get('http://localhost:5000/api/blogs')
+          axios.get('https://learnhealth-api/api/subscriptions'),
+          axios.get('https://learnhealth-api/api/bookings'),
+          axios.get('https://learnhealth-api/api/blogs')
         ]);
 
         setEmails(emailsResponse.data);
