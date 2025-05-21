@@ -95,7 +95,7 @@ const RightBar = ({ product }) => {
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/blogs');
+        const response = await axios.get('https://learnhealth-api/api/blogs');
         const related = response.data.filter(b => b?.group === product?.group && b?.id !== product?.id && b?.category === 'products');
         setRelatedPosts(related);
       } catch (err) {
@@ -130,7 +130,7 @@ export default function ProductPage() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+        const response = await axios.get(`https://learnhealth-api/api/blogs/${id}`);
         const selectedProduct = response.data;
         if (!selectedProduct || selectedProduct.category !== 'products') {
           throw new Error('Product not found');
