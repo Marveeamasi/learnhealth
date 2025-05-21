@@ -25,7 +25,7 @@ export default function CategoryPage() {
       setBanner(selectedBanner);
       const fetchArticles = async() => {
           try {
-        const response = await axios.get('http://localhost:5000/api/blogs');
+        const response = await axios.get('https://learnhealth-api/api/blogs');
         const selectedArticles = response.data.filter(b=> b?.category === 'articles' && b?.group.toLowerCase() === validId.toLowerCase());
         setArticles(selectedArticles);
       } catch (err) {
