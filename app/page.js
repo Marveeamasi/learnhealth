@@ -136,7 +136,7 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-5 max-lg:grid-cols-3 max-sm:grid-cols-2 gap-5">
           {exploreBy.map((by, index) => (
-            <motion.div
+            <motion.div 
               key={by.name}
               variants={scaleIn}
               initial="hidden"
