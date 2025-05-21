@@ -21,7 +21,7 @@ export default function AlphaSearch({ handleSetAlphabet }) {
     const fetchBlogs = async () => {
       try {
         setLoading(true)
-        const response = await axios.get('http://localhost:5000/api/blogs')
+        const response = await axios.get('https://learnhealth-api/api/blogs')
         const blogs = response.data.filter(b => b?.category === 'articles')
         setHealthTopics(blogs)
       } catch (err) {
