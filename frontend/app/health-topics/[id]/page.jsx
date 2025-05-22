@@ -98,7 +98,7 @@ const RightBar = ({ article }) => {
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await axios.get('https://learnhealth-api/api/blogs');
+        const response = await axios.get('https://learnhealth-api.vercel.api/api/blogs');
         const related = response.data.filter(b => b?.group === article?.group && b?.id !== article?.id);
         setRelatedPosts(related);
       } catch (err) {
@@ -133,7 +133,7 @@ export default function ArticlePage() {
     const fetchArticle = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://learnhealth-api/api/blogs/${id}`);
+        const response = await axios.get(`https://learnhealth-api.vercel.app/api/blogs/${id}`);
         const selectedArticle = response.data;
         if (!selectedArticle || selectedArticle.category !== 'articles') {
           throw new Error('Article not found');
@@ -214,7 +214,7 @@ export default function ArticlePage() {
           <RightBar article={article} />
         </div>
       </section>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
