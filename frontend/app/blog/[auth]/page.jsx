@@ -71,7 +71,7 @@ export default function BlogWritingPage() {
     if (blogId) {
       const fetchBlog = async () => {
         try {
-          const response = await axios.get(`https://learnhealth-api/api/blogs/${blogId}`);
+          const response = await axios.get(`https://learnhealth-api.vercel.app/api/blogs/${blogId}`);
           const blog = response.data;
           setFormData({
             name: blog.name,
@@ -198,7 +198,7 @@ export default function BlogWritingPage() {
     }
 
     try {
-      const response = await axios.post("https://learnhealth-api/api/blogs", formDataToSend, {
+      const response = await axios.post("https://learnhealth-api.vercel.app/api/blogs", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setSubmitStatus({ type: "success", message: "Blog published successfully!" });
@@ -255,7 +255,7 @@ export default function BlogWritingPage() {
       }
 
       try {
-        const response = await axios.put(`https://learnhealth-api/api/blogs/${blogId}`, formDataToSend, {
+        const response = await axios.put(`https://learnhealth-api.vercel.app/api/blogs/${blogId}`, formDataToSend, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         setSubmitStatus({ type: "success", message: "Blog updated successfully!" });
