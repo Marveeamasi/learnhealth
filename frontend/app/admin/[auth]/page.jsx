@@ -210,9 +210,9 @@ export default function AdminPage() {
       try {
         setLoading(true);
         const [emailsResponse, bookingsResponse, blogsResponse] = await Promise.all([
-          axios.get('https://learnhealth-api/api/subscriptions'),
-          axios.get('https://learnhealth-api/api/bookings'),
-          axios.get('https://learnhealth-api/api/blogs')
+          axios.get('https://learnhealth-api.vercel.app/api/subscriptions'),
+          axios.get('https://learnhealth-api.vercel.app/api/bookings'),
+          axios.get('https://learnhealth-api.vercel.app/api/blogs')
         ]);
 
         setEmails(emailsResponse.data);
