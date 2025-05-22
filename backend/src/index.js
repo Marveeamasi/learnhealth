@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:3000'
+  process.env.FRONTEND_URL || 'http://localhost:3000', 'https://learnhealth.vercel.app'
 ];
 app.use(cors({
   origin: function (origin, callback) {
