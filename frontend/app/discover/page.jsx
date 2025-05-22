@@ -86,7 +86,7 @@ export default function DiscoverPage() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://learnhealth-api/api/blogs');
+        const response = await axios.get('https://learnhealth-api.vercel.app/api/blogs');
         const productList = response.data.filter(b => b?.category === 'products');
         setProducts(productList);
         setFilteredProducts(productList);
