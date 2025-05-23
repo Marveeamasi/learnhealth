@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { useEffect, useState } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
-import { EXPLORE_BY, FEATURED_STORIES } from "@/dummyData";
+import { EXPLORE_BY } from "@/dummyData";
 import HeadCard from "@/components/HeadCard";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,10 +32,23 @@ const Featured = ({featuredStories}) => {
      <section className="flex flex-col w-full gap-5 mt-10">
         <h4 className="font-[600] text-[24px]">Featured</h4>
         <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1">
-          {featuredStories.map(fStory => 
-           <HeadCard topic={fStory.topic} key={fStory.id} img={fStory.image} title={fStory.title} h={'h-[300px]'} text={'text-[24px]'} textsm={'text-[18px]'}/>
-          )
-          }
+          {featuredStories.map((fStory, index) => (
+            <Link
+              key={fStory.id}
+              href={`/${fStory.category==="articles"? "health-topics" : "product-review"}/${fStory.id}`}
+            >
+              <HeadCard
+                topic={fStory.group}
+                media={fStory.media}
+                mediaType={fStory.media_type}
+                title={fStory.name}
+                h={'h-[300px]'}
+                text={'text-[24px]'}
+                isFeature={true}
+                textsm={'text-[18px]'}
+              />
+            </Link>
+          ))}
          </div>
        </section>
   )
