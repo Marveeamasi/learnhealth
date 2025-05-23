@@ -1,5 +1,6 @@
 'use client'
 
+import axios from "axios";
 import AlphaSearch from "@/components/AlphaSearch";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -59,10 +60,22 @@ export default function HealthTopicsPage() {
     const [featuredStories, setFeaturedStories] = useState([]);
     const [selectedAlphabet, setSelectedAlphabet] = useState('A');
   
-     useEffect(()=> {
-          setExploreBy(EXPLORE_BY);
-          setFeaturedStories(FEATURED_STORIES);
-      },[])
+  useEffect(() => {
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get("https://learnhealth-api.vercel.app/api/blogs");
+      const blogs = response.data;
+      
+      const featured = [...blogs].sort(() => 0.5 - Math.random()).slice(0, 3);
+      setFeaturedStories(featured);
+
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+    }
+  };
+  setExploreBy(EXPLORE_BY);
+  fetchBlogs();
+}, []);
 
    const handleSetAlphabet = (alphabet) => {
     setSelectedAlphabet(alphabet);
