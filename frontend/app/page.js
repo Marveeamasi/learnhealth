@@ -132,7 +132,7 @@ useEffect(() => {
           {topArticles.map((article, index) => (
             <Link
               key={article.id}
-              href={`/health-topics/${articles.id}`}
+              href={`/health-topics/${article.id}`}
             >
               <HeadCard
                 media={article.media}
