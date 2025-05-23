@@ -1,10 +1,11 @@
 'use client'
 
+import axios from "axios";
 import AlphaSearch from "@/components/AlphaSearch";
 import Footer from "@/components/Footer";
 import HeadCard from "@/components/HeadCard";
 import Navbar from "@/components/Navbar";
-import { aboutList, EXPLORE_BY, FEATURED_STORIES, MORE_ARTICLES, TODAY_TOP_STORIES, TOP_ARTICLES, TOP_HEALTH_TOPICS } from "@/dummyData";
+import { aboutList, EXPLORE_BY } from "@/dummyData";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { SlArrowRightCircle } from "react-icons/sl";
@@ -19,14 +20,38 @@ export default function HomePage() {
   const [featuredStories, setFeaturedStories] = useState([]);
   const [moreArticles, setMoreArticles] = useState([]);
 
-  useEffect(() => {
-    setTodayTopStories(TODAY_TOP_STORIES);
-    setTopArticles(TOP_ARTICLES);
-    setExploreBy(EXPLORE_BY);
-    setTopHealthTopics(TOP_HEALTH_TOPICS);
-    setFeaturedStories(FEATURED_STORIES);
-    setMoreArticles(MORE_ARTICLES);
-  }, []);
+useEffect(() => {
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get("https://learnhealth-api.vercel.app/api/blogs");
+      const blogs = response.data;
+      
+      const sortedByDate = [...blogs].sort((a, b) => new Date(b.published_on) - new Date(a.published_on));
+      setTodayTopStories(sortedByDate.slice(0, 2));
+      
+      const topArticlesThis = sortedByDate.filter(b => b.category === "articles").slice(0, 3);
+      setTopArticles(topArticlesThis);
+
+      const articlesWithName = blogs.filter(b => b.category === "articles" && b.name);
+      const shuffledTopics = articlesWithName.sort(() => 0.5 - Math.random()).slice(0, 15);
+      setTopHealthTopics(shuffledTopics.map(b => b.name));
+
+      const featured = [...blogs].sort(() => 0.5 - Math.random()).slice(0, 3);
+      setFeaturedStories(featured);
+      
+      const more = blogs.filter(b => b.category === "articles");
+      const shuffledMore = more.sort(() => 0.5 - Math.random()).slice(0, 4);
+      setMoreArticles(shuffledMore);
+
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+    }
+  };
+  setExploreBy(EXPLORE_BY);
+  fetchBlogs();
+}, []);
+
+  
 
   const handleSetAlphabet = (alphabet) => {
     console.log(alphabet);
@@ -86,15 +111,12 @@ export default function HomePage() {
           </motion.p>
           <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-10">
             {todayTopStories.map((story, index) => (
-              <motion.div
+              <Link
                 key={story.id}
-                variants={scaleIn}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: index * 0.2 }}
+                href={`/${story.category==="articles"? "health-topics" : "product-review"}/${story.id}`}
               >
-                <HeadCard img={story.image} title={story.title} />
-              </motion.div>
+                <HeadCard media={story.media} mediaType={story.media_type} title={story.name} />
+              </Link>
             ))}
           </div>
         </div>
@@ -108,21 +130,19 @@ export default function HomePage() {
         </motion.h4>
         <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-5">
           {topArticles.map((article, index) => (
-            <motion.div
+            <Link
               key={article.id}
-              variants={scaleIn}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: index * 0.2 }}
+              href={`/health-topics/${articles.id}`}
             >
               <HeadCard
-                img={article.image}
-                title={article.title}
+                media={article.media}
+                title={article.name}
+                mediaType={article.media_type}
                 h={'h-[300px]'}
                 text={'text-[24px]'}
                 textsm={'text-[18px]'}
               />
-            </motion.div>
+            </Link>
           ))}
         </div>
       </AnimatedSection>
@@ -131,9 +151,6 @@ export default function HomePage() {
           <motion.h4 variants={slideIn} className="font-[600] text-[24px] text-[#004D43]">
             Explore By
           </motion.h4>
-          <motion.div variants={slideIn} className="flex gap-2 items-center text-[24px] font-[700] cursor-pointer max-sm:text-[18px]">
-            View All <SlArrowRightCircle />
-          </motion.div>
         </div>
         <div className="grid grid-cols-5 max-lg:grid-cols-3 max-sm:grid-cols-2 gap-5">
           {exploreBy.map((by, index) => (
@@ -152,22 +169,19 @@ export default function HomePage() {
           <motion.h4 variants={slideIn} className="font-[600] text-[24px] text-[#004D43] sm:hidden">
             Top Topics
           </motion.h4>
-          <motion.div variants={slideIn} className="flex gap-2 items-center text-[24px] font-[700] cursor-pointer max-sm:text-[18px]">
+          <Link href={`/health-topics`} className="flex gap-2 items-center text-[24px] font-[700] cursor-pointer max-sm:text-[18px]">
             View All <SlArrowRightCircle />
-          </motion.div>
+          </Link>
         </div>
         <div className="flex items-center flex-wrap gap-5 max-sm:justify-center max-w-[1121px]">
           {topHealthTopics.map((topic, index) => (
-            <motion.div
+            <Link
               key={topic}
-              variants={scaleIn}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: index * 0.1 }}
+              href={`/health-topics/${topic.id}`}
               className="py-[10px] px-[24px] rounded-[24px] bg-[#F3F2F2] cursor-pointer"
             >
               {topic}
-            </motion.div>
+            </Link>
           ))}
         </div>
       </AnimatedSection>
@@ -177,23 +191,21 @@ export default function HomePage() {
         </motion.h4>
         <div className="grid grid-cols-3 gap-5 max-sm:flex max-sm:items-center max-sm:overflow-x-scroll overflow-y-hidden max-sm:pb-10">
           {featuredStories.map((fStory, index) => (
-            <motion.div
+            <Link
               key={fStory.id}
-              variants={scaleIn}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: index * 0.2 }}
+              href={`/${fStory.category==="articles"? "health-topics" : "product-review"}/${fStory.id}`}
             >
               <HeadCard
-                topic={fStory.topic}
-                img={fStory.image}
-                title={fStory.title}
+                topic={fStory.group}
+                media={fStory.media}
+                mediaType={fStory.media_type}
+                title={fStory.name}
                 h={'h-[300px]'}
                 text={'text-[24px]'}
                 isFeature={true}
                 textsm={'text-[18px]'}
               />
-            </motion.div>
+            </Link>
           ))}
         </div>
       </AnimatedSection>
@@ -242,30 +254,28 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-5">
           {moreArticles.map((articles, index) => (
-            <motion.div
+            <Link
               key={articles.id}
-              variants={scaleIn}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: index * 0.2 }}
+              href={`/health-topics/${articles.id}`}
               className="w-full h-[344px] bg-[#F9E9DA] cursor-pointer rounded-[8px] max-sm:h-[179px] flex items-center justify-center relative"
             >
-              <Image
-                src={articles.image}
+                {articles.media_type === "image" && articles.media && 
+                <Image
+                src={articles.media}
                 width={2000}
                 height={2000}
                 alt="bg image"
                 className="w-full h-full object-cover object-top"
-              />
+              />}
               <div className="absolute bottom-5 left-5 gap-2 flex flex-col">
                 <div className="font-[600] text-[24px] text-[#fff]">
-                  {articles.title}
+                  {articles.name}
                 </div>
                 <div className="font-[400] text-[16px] text-[#fff] max-w-[462px]">
-                  {articles.desc}
+                  {articles.headings[0].paragraphs[0].text}
                 </div>
               </div>
-            </motion.div>
+            </Link>
           ))}
         </div>
       </AnimatedSection>
