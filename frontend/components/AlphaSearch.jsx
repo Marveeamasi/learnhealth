@@ -67,11 +67,13 @@ export default function AlphaSearch({ handleSetAlphabet }) {
   const shouldShowSearchResults = searchTerm.trim() !== ''
 
   if (loading) {
-    return <div className="text-center text-gray-500 px-30 max-sm:px-5 py-10">Loading...</div>
+    return <div className="flex items-center justify-center">
+    <img src='/loader.svg' alt='Loading..'/>
+    </div>
   }
 
   if (error) {
-    return <div className="text-center text-red-500 px-30 max-sm:px-5 py-10">{error}</div>
+    return <div onClick={()=> router.refresh()} className="flex self-center w-fit p-5 rounded-xl border">Oops! please try again</div>
   }
 
   return (
