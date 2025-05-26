@@ -272,7 +272,7 @@ useEffect(() => {
                   {articles.name}
                 </div>
                 <div className="font-[400] text-[16px] text-[#fff] max-w-[462px]">
-                  {articles?.headings[0]?.paragraphs[0]?.text?.slice(0, 20)}
+                  {`${articles?.headings[0]?.paragraphs[0]?.text?.slice(0, 50)}..`}
                 </div>
               </div>
             </Link>
