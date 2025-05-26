@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { SlArrowRightCircle } from 'react-icons/sl'
 import axios from 'axios'
+import { IoMdRefresh } from "react-icons/io";
+import { useRouter } from 'next/navigation'
 
 export default function AlphaSearch({ handleSetAlphabet }) {
   const [healthTopics, setHealthTopics] = useState([])
@@ -16,6 +18,7 @@ export default function AlphaSearch({ handleSetAlphabet }) {
   const [filteredAlphabetResults, setFilteredAlphabetResults] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const router = useRouter();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -73,7 +76,7 @@ export default function AlphaSearch({ handleSetAlphabet }) {
   }
 
   if (error) {
-    return <div onClick={()=> router.refresh()} className="flex self-center w-fit p-5 rounded-xl border">Oops! please try again</div>
+    return <div className="flex w-full justify-center"><div onClick={()=> router.refresh()} className="flex items-center justify-center w-fit p-3 gap-3 rounded-xl border">Oops! please try again<IoMdRefresh/></div></div>
   }
 
   return (
