@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback, useMemo, memo } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { GoDotFill } from 'react-icons/go';
+import { IoMdRefresh } from "react-icons/io";
 
 const LeftBar = memo(({ emails, searchQuery, setSearchQuery }) => {
   const filteredEmails = useMemo(() => {
@@ -244,13 +245,11 @@ export default function AdminPage() {
           </div>
         </div>
         {loading ? (
-          <p className="text-center text-gray-500">
-            Loading...
-          </p>
+          <div className="flex items-center justify-center">
+‎    <img src='/loader.svg' alt='Loading..'/>
+‎    </div>
         ) : error ? (
-          <p className="text-center text-red-500">
-            {error}
-          </p>
+          <div className="flex w-full justify-center"><div onClick={()=> router.refresh()} className="flex items-center justify-center w-fit p-3 gap-3 rounded-xl border">Oops! please try again<IoMdRefresh/></div></div>
         ) : (
           <div className="flex max-sm:flex-col sm:mt-10 max-sm:gap-10">
             <LeftBar
