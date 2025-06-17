@@ -54,7 +54,7 @@ export default function CategoryPage() {
       <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1 max-sm:pb-10">
            {articles.map(t => 
            <Link href={`/health-topics/${t.id}`} key={t.id}>
-            <HeadCard img={t.media} title={t.name} h={'h-[300px]'} text={'text-[24px]'} textsm={'text-[18px]'}/>
+            <HeadCard media={t.media} mediaType={t.media_type} title={t.name} h={'h-[300px]'} text={'text-[24px]'} textsm={'text-[18px]'}/>
             </Link>
            )
            }
