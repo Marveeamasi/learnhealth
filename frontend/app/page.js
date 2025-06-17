@@ -34,7 +34,7 @@ useEffect(() => {
 
       const articlesWithName = blogs.filter(b => b.category === "articles" && b.name);
       const shuffledTopics = articlesWithName.sort(() => 0.5 - Math.random()).slice(0, 15);
-      setTopHealthTopics(shuffledTopics.map(b => b.name));
+      setTopHealthTopics(shuffledTopics.map(b => {name: b.name, id: b.id}));
 
       const featured = [...blogs].sort(() => 0.5 - Math.random()).slice(0, 3);
       setFeaturedStories(featured);
@@ -176,11 +176,11 @@ useEffect(() => {
         <div className="flex items-center flex-wrap gap-5 max-sm:justify-center max-w-[1121px]">
           {topHealthTopics.map((topic, index) => (
             <Link
-              key={topic}
+              key={topic.id}
               href={`/health-topics/${topic.id}`}
               className="py-[10px] px-[24px] rounded-[24px] bg-[#F3F2F2] cursor-pointer"
             >
-              {topic}
+              {topic.name}
             </Link>
           ))}
         </div>
