@@ -25,7 +25,7 @@ async function uploadFile(file, fileName, mediaType) {
       try {
         buffer = await sharp(file.data)
           .resize({
-               width: 1000,    
+               width: 1500,    
               withoutEnlargement: true, 
              fit: 'inside'   
             })
