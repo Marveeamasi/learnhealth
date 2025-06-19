@@ -42,7 +42,7 @@ const MiddleBar = ({ article }) => {
       {article?.headings?.map(h =>
         <section key={h?.name} id={h?.name} className='flex flex-col gap-5'>
           <h1 className='font-[700] text-[32px]'>{h?.name}</h1>
-          <div className='prose flex flex-col gap-5'>
+          <div className='flex flex-col gap-5'>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {h?.paragraphs}
             </ReactMarkdown>
@@ -87,7 +87,7 @@ const RightBar = ({ article }) => {
   useEffect(() => {
     const fetchRelatedPosts = async () => {
       try {
-        const response = await axios.get('https://learnhealth-api.vercel.api/api/blogs');
+        const response = await axios.get('https://learnhealth-api.vercel.app/api/blogs');
         const related = response.data.filter(b => b?.group === article?.group && b?.id !== article?.id);
         setRelatedPosts(related);
       } catch (err) {
@@ -158,13 +158,18 @@ export default function ArticlePage() {
       <Navbar page={'health topics'} />
       <div className='w-full relative h-[402px] max-sm:h-[250px] bg-[gray] flex justify-center items-center'>
         {article?.media_type === 'image' && (
+          <div className='flex items-center h-full w-full'>
+            <div className='w-[40%] h-[full]'>
+         
+            </div>
           <Image 
             width={2000} 
             height={2000} 
             alt='topic banner' 
             src={article.media} 
-            className='absolute w-full h-full object-cover object-center'
+            className='w-[60%] h-full object-cover object-center'
           />
+          </div>
         )}
         <div className='absolute max-sm:hidden left-0 flex flex-col gap-5 w-[90%] h-full px-30 max-sm:px-5 py-20 max-sm:py-5' style={{ background: `linear-gradient(90deg, #343434 35.76%, rgba(102, 101, 101, 0) 65.49%)` }}>
           <div className="flex items-center gap-2 text-[16px] text-[#979797]">
