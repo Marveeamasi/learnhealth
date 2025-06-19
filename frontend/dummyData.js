@@ -55,3 +55,9 @@ export const SERVICES = [
     id: 4, img: '/img15.png', heading: 'Blogs and Ghostwriting', paragraph: `Tailored content to your business needs and strategies.`, 
   }
 ]
+
+const headings=[
+  {"name": "Overview", "paragraphs": [{"text": "Public health is a broad field encompassing many areas of health and well-being. Key topics include infectious diseases, environmental health, mental health, health equity, and health policy. Specific areas of study and research also include immunization, nutrition, obesity, and substance abuse. ", "heading": ""}]},
+ {"name": "About these diseases", "paragraphs": [{"text": "This area focuses on preventing and controlling the spread of infectious diseases, including pandemics like COVID-19, as well as emerging and reemerging diseases. ", "heading": ""}]},
+  {"name": "", "paragraphs": [{"text": "", "heading": ""}]}
+]

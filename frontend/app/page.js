@@ -34,7 +34,7 @@ useEffect(() => {
 
       const articlesWithName = blogs.filter(b => b.category === "articles" && b.name);
       const shuffledTopics = articlesWithName.sort(() => 0.5 - Math.random()).slice(0, 15);
-      setTopHealthTopics(shuffledTopics.map(b => {name: b.name, id: b.id}));
+      setTopHealthTopics(shuffledTopics.map(b => ({name: b.name, id: b.id})));
 
       const featured = [...blogs].sort(() => 0.5 - Math.random()).slice(0, 3);
       setFeaturedStories(featured);
@@ -267,11 +267,11 @@ useEffect(() => {
                 alt="bg image"
                 className="w-full h-full object-cover object-top"
               />}
-              <div className="absolute bottom-5 left-5 gap-2 flex flex-col">
-                <div className="font-[600] text-[24px] text-[#fff]">
+              <div className="absolute bottom-0 left-0 backdrop-blur-[2px] w-full bg-[#00000020] px-5 py-3 gap-2 flex flex-col">
+                <div className="font-[600] text-[24px] max-sm:text-[16px] text-[#fff]">
                   {articles.name}
                 </div>
-                <div className="font-[400] text-[16px] text-[#fff] max-w-[462px]">
+                <div className="font-[400] text-[16px] max-sm:text-[12px] text-[#fff] max-w-[462px]">
                   {`${articles?.headings[0]?.paragraphs[0]?.text?.slice(0, 50)}..`}
                 </div>
               </div>

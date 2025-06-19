@@ -9,6 +9,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import moment from 'moment';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const LeftBar = ({ handleSetCurrentItem, currentItem, product }) => {
   const router = useRouter();
@@ -40,21 +42,11 @@ const MiddleBar = ({ product }) => {
       {product?.headings?.map(h =>
         <section key={h?.name} id={h?.name} className='flex flex-col gap-5'>
           <h1 className='font-[700] text-[32px]'>{h?.name}</h1>
-          <div className='flex flex-col gap-5'>
-            {h?.paragraphs?.map((p) => 
-              <span key={p?.text} className='font-[400] text-[16px]'>
-                {p?.heading && (
-                  <span 
-                    className='font-[600] text-[18px]' 
-                    style={{ display: p?.heading?.includes(':') ? 'initial' : 'block' }}
-                  >
-                    {p?.heading}
-                  </span>
-                )}
-                {p?.text}
-              </span>
-            )}
-          </div>
+          <div className='prose flex flex-col gap-5'>
+                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                     {h?.paragraphs}
+                     </ReactMarkdown>
+                   </div>
         </section>
       )}
       <section className='flex flex-col gap-2'>
