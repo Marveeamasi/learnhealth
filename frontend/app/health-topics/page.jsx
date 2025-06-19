@@ -45,7 +45,7 @@ const Featured = ({featuredStories}) => {
                 title={fStory.name}
                 h={'h-[300px]'}
                 text={'text-[24px]'}
-                isFeature={true}
+                isFeature={false}
                 textsm={'text-[18px]'}
               />
             </Link>
