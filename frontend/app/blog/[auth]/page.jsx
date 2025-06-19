@@ -47,7 +47,7 @@ export default function BlogWritingPage() {
     media: null,
     mediaType: "image",
     desc: "",
-    headings: [{ name: "", paragraphs: [{ heading: "", text: "" }] }],
+    headings: [{ name: "", paragraphs: ``}],
     keywords: [],
     sources: [],
     author: "",
@@ -117,7 +117,7 @@ export default function BlogWritingPage() {
       ...formData,
       headings: [
         ...formData.headings,
-        { name: "", paragraphs: [{ heading: "", text: "" }] },
+        { name: "", paragraphs: ``},
       ],
     });
   };
@@ -129,29 +129,15 @@ export default function BlogWritingPage() {
     });
   };
 
-  const addParagraph = (headingIndex) => {
-    const newHeadings = [...formData.headings];
-    newHeadings[headingIndex].paragraphs.push({ heading: "", text: "" });
-    setFormData({ ...formData, headings: newHeadings });
-  };
-
-  const removeParagraph = (headingIndex, paragraphIndex) => {
-    const newHeadings = [...formData.headings];
-    newHeadings[headingIndex].paragraphs = newHeadings[headingIndex].paragraphs.filter(
-      (_, i) => i !== paragraphIndex
-    );
-    setFormData({ ...formData, headings: newHeadings });
-  };
-
   const handleHeadingChange = (index, field, value) => {
     const newHeadings = [...formData.headings];
     newHeadings[index][field] = value;
     setFormData({ ...formData, headings: newHeadings });
   };
 
-  const handleParagraphChange = (headingIndex, paragraphIndex, field, value) => {
+  const handleParagraphChange = (headingIndex, value) => {
     const newHeadings = [...formData.headings];
-    newHeadings[headingIndex].paragraphs[paragraphIndex][field] = value;
+    newHeadings[headingIndex].paragraphs = value;
     setFormData({ ...formData, headings: newHeadings });
   };
 
@@ -207,7 +193,7 @@ export default function BlogWritingPage() {
         media: null,
         mediaType: "image",
         desc: "",
-        headings: [{ name: "", paragraphs: [{ heading: "", text: "" }] }],
+        headings: [{ name: "", paragraphs: `` }],
         keywords: [],
         sources: [],
         author: "",
@@ -493,48 +479,21 @@ export default function BlogWritingPage() {
                       Remove
                     </motion.button>
                   </div>
-                  {heading.paragraphs.map((paragraph, pIndex) => (
                     <motion.div
-                      key={pIndex}
                       variants={fadeIn}
                       className="flex flex-col gap-2"
                     >
-                      <input
-                        type="text"
-                        value={paragraph.heading}
-                        onChange={(e) =>
-                          handleParagraphChange(hIndex, pIndex, "heading", e.target.value)
-                        }
-                        placeholder="Paragraph Heading (optional)"
-                        className="h-[48px] w-full bg-transparent border-[1px] border-[#00000050] rounded-[8px] p-3 outline-none font-[400] text-[16px]"
-                      />
                       <textarea
-                        value={paragraph.text}
+                        value={heading.paragraphs}
                         onChange={(e) =>
-                          handleParagraphChange(hIndex, pIndex, "text", e.target.value)
+                          handleParagraphChange(hIndex, e.target.value)
                         }
                         placeholder="Paragraph Text"
                         required
                         className="h-[120px] w-full bg-transparent border-[1px] border-[#00000050] rounded-[8px] p-3 outline-none font-[400] text-[16px] resize-none"
                       />
-                      <motion.button
-                        variants={scaleIn}
-                        type="button"
-                        onClick={() => removeParagraph(hIndex, pIndex)}
-                        className="font-[600] text-[16px] self-end p-2 border rounded-xl"
-                      >
-                        Remove
-                      </motion.button>
+
                     </motion.div>
-                  ))}
-                  <motion.button
-                    variants={scaleIn}
-                    type="button"
-                    onClick={() => addParagraph(hIndex)}
-                    className="flex items-center gap-2 font-[600] text-[16px] text-[#FCF6F0] bg-[#979797] rounded-[24px] px-4 py-2 self-start"
-                  >
-                    <FaPlus /> Add Paragraph
-                  </motion.button>
                 </motion.div>
               ))}
             </motion.div>
