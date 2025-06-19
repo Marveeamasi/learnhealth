@@ -159,7 +159,7 @@ export default function ArticlePage() {
       <div className='w-full relative h-[402px] max-sm:h-[250px] bg-[gray] flex justify-center items-center'>
         {article?.media_type === 'image' && (
           <div className='flex items-center h-full w-full'>
-            <div className='w-[40%] h-[full]'>
+            <div className='w-[40%] h-[full] max-sm:hidden'>
          
             </div>
           <Image 
@@ -167,11 +167,11 @@ export default function ArticlePage() {
             height={2000} 
             alt='topic banner' 
             src={article.media} 
-            className='w-[60%] h-full object-cover object-center'
+            className='w-[60%] max-sm:w-full h-full object-cover object-center'
           />
           </div>
         )}
-        <div className='absolute max-sm:hidden left-0 flex flex-col gap-5 w-[90%] h-full px-30 max-sm:px-5 py-20 max-sm:py-5' style={{ background: `linear-gradient(90deg, #343434 35.76%, rgba(102, 101, 101, 0) 65.49%)` }}>
+        <div className='absolute max-sm:hidden left-0 flex flex-col gap-5 w-full h-full px-30 max-sm:px-5 py-20 max-sm:py-5' style={{ background: `linear-gradient(90deg, #343434 45.76%, rgba(102, 101, 101, 0) 80.49%)` }}>
           <div className="flex items-center gap-2 text-[16px] text-[#979797]">
             <span>Home</span><RiArrowRightSLine /><span>Health Topics</span><RiArrowRightSLine /><span className='capitalize'>{selectedAlphabet}</span><RiArrowRightSLine /><span>{article.name}</span>
           </div> 

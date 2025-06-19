@@ -24,9 +24,17 @@ async function uploadFile(file, fileName, mediaType) {
     if (mediaType === 'image') {
       try {
         buffer = await sharp(file.data)
-          .resize({ width: 800 }) // Resize to max width 800px
-          .jpeg({ quality: 80 }) // Compress to 80% quality
-          .toBuffer();
+          .resize({
+               width: 1000,    
+              withoutEnlargement: true, 
+             fit: 'inside'   
+            })
+          .webp({
+              quality: 80,           
+              smartSubsample: true,  
+              effort: 4,            
+              lossless: false     
+             })
       } catch (sharpError) {
         console.error('Sharp processing error:', sharpError);
         throw new Error(`Image processing failed: ${sharpError.message}`);
