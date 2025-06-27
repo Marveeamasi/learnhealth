@@ -34,7 +34,7 @@ async function uploadFile(file, fileName, mediaType) {
               smartSubsample: true,  
               effort: 4,            
               lossless: false     
-             })
+             }).toBuffer();
       } catch (sharpError) {
         console.error('Sharp processing error:', sharpError);
         throw new Error(`Image processing failed: ${sharpError.message}`);
